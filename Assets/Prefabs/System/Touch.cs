@@ -1,12 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Touch : MonoBehaviour
+public class Touch : NetworkBehaviour
 {
-
-
-    public Marine testMarine;
-
     public float singleClickTime;
     public float holdingTime;
 
@@ -16,12 +13,11 @@ public class Touch : MonoBehaviour
 
 
 
-    Collider2D[] touchColliders;
+    Collider2D[] touchColliders = new Collider2D[0];
 
     // Use this for initialization
     void Start()
     {
-
     }
 
     void Update()
@@ -68,16 +64,19 @@ public class Touch : MonoBehaviour
             //Debug.Log("Single Click");
             foreach (Collider2D c in touchColliders)
             {
-              
-
-
+                if(c.CompareTag("SpawnUnit"))
+                {
+                    
+                    //GetComponent<PlayerController>().CmdSpawnObject(null);
+                    c.GetComponent<SpawnUnit>().spawn();
+                }
             }
 
             Vector2 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             //Debug.Log(clickPos);
-            //Debug.Log(Pathing.positionToPoint(clickPos).x);
+            //Debug.Log(Pathing.positionToPoint(clickPos).x + " " + Pathing.positionToPoint(clickPos).y);
 
-            testMarine.moveOrder(Pathing.positionToPoint(clickPos));
+           // testMarine.moveOrder(Pathing.positionToPoint(clickPos));
         }
         else
         {

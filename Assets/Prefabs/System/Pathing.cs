@@ -9,7 +9,7 @@ public class Pathing : MonoBehaviour {
     public int mapHeight;
 
     public float pathingDensity;
-    static float density;
+    public static float density;
 
     static Grid grid;
 
@@ -44,7 +44,7 @@ public class Pathing : MonoBehaviour {
     public static Vector3 pointToPosition(Point input)
     {
         Vector2 test = new Vector2((float)input.x / density, (float)input.y / density);
-        Debug.Log(test);
+        //Debug.Log(test);
         return test;
     }
 

@@ -30,7 +30,7 @@ public class Marine : MonoBehaviour {
     IEnumerator walk(Point target)
     {
         List<Point> path = Pathing.getPath(myPosition(), target);
-
+        //List<Point> path = new List<Point>(){ new Point(0,5)};
         Debug.Log("Walk towards: " + target.x + " " + target.y);
 
         foreach(Point p in path)
@@ -42,11 +42,11 @@ public class Marine : MonoBehaviour {
             {
                 yield return null;
             }
-                
+
             //moves toward point
             movingToPointRoutine = moveToPoint(p);
             StartCoroutine(movingToPointRoutine);
-            while(movingToPointRoutine != null)
+            while (movingToPointRoutine != null)
             {
                 yield return null;
             }
@@ -109,8 +109,8 @@ public class Marine : MonoBehaviour {
 
     Point myPosition()
     {
-        currentPosition.x = Mathf.FloorToInt(transform.position.x);
-        currentPosition.y = Mathf.FloorToInt(transform.position.y);
+        currentPosition.x = Mathf.FloorToInt(transform.position.x*Pathing.density);
+        currentPosition.y = Mathf.FloorToInt(transform.position.y*Pathing.density);
 
         return currentPosition;
     }
